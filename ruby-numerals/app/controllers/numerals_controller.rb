@@ -1,4 +1,5 @@
 class NumeralsController < ApplicationController
+  include ApplicationHelper
 
   # GET /numerals
   # GET /numerals.json
@@ -9,10 +10,9 @@ class NumeralsController < ApplicationController
   # POST /numerals
   # POST /numerals.json
   def transform
-    @number = numeral_params[:number].to_i
-    if @number.is_a? Integer
-    else
-      flash[:error] = 'The number is not an integer!'
+    @number = numeral_params[:number]
+    unless numeric? @number
+      flash[:error] = 'The value is not an integer!'
       redirect_to root_path
       return
     end
