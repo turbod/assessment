@@ -1,0 +1,8 @@
+= simple_form_for(:number, url: '/numerals') do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :number, as: :integer, hint: 'Please enter an integer, and the system shows the english phrase of the number.'
+
+  .form-actions
+    = f.button :submit
