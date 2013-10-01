@@ -12,7 +12,7 @@ class NumeralsController < ApplicationController
   def transform
     @number = numeral_params[:number]
     @number = @number.to_i.abs
-    
+
     unless numeric? @number
       flash[:error] = 'The value is not an integer!'
       redirect_to root_path
