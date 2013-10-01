@@ -30,8 +30,8 @@ module NumeralsHelper
       90 => 'ninety'
   }
 
-  def convert(number, glue = true)
-    number = number.to_i
+  def number_to_word(number, glue = true)
+    number = number.to_i.abs
     string_number = ''
 
     if @@h.has_key? number
@@ -51,24 +51,24 @@ module NumeralsHelper
       when 4
         if str_num[1,1] == '0' or str_num[2,length-2] == '00'
           string_number = "#{single_digit(str_num[0])} thousand"
-          string_number += concat(convert(number % 1000), glue)
+          string_number += concat(number_to_word(number % 1000), glue)
         else
           string_number = "#{two_digit(str_num[0,2])} hundred"
-          string_number += concat(convert(str_num[2,length-2]), glue)
+          string_number += concat(number_to_word(str_num[2,length-2]), glue)
         end
       when 5
         string_number = "#{two_digit(str_num[0,length-3])} thousand"
-        string_number += concat(convert(str_num[length-3,3], false), glue)
+        string_number += concat(number_to_word(str_num[length-3,3], false), glue)
       when 6
-        string_number = "#{convert(str_num[0,3], false)} thousand"
-        string_number += concat(convert(str_num[3,3], false), glue)
+        string_number = "#{number_to_word(str_num[0,3], false)} thousand"
+        string_number += concat(number_to_word(str_num[3,3], false), glue)
       when 7..9
-        string_number = "#{convert(str_num[0,length-6], false)} million"
-        string_number += concat(convert(str_num[length-6,6], false), glue)
+        string_number = "#{number_to_word(str_num[0,length-6], false)} million"
+        string_number += concat(number_to_word(str_num[length-6,6], false), glue)
       #when 10..12
       else
-        string_number = "#{convert(str_num[0,length-9], false)} billion"
-        string_number += concat(convert(str_num[length-9,9], false), glue)
+        string_number = "#{number_to_word(str_num[0,length-9], false)} billion"
+        string_number += concat(number_to_word(str_num[length-9,9], false), glue)
 
       end
     end

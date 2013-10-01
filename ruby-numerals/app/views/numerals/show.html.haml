@@ -1,7 +1,7 @@
 %p#notice= notice
 
 %p
-  #{@number} == #{convert(@number)}
+  #{@number} == #{number_to_word(@number)}
 
 
 = link_to 'Transform new number', root_path, class: 'btn'
